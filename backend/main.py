@@ -135,6 +135,7 @@ def user_history():
 
 @app.route('/path', methods=['GET'])
 @jwt_required()
+@swag_from(path_swag)
 def process_path():
     A = request.json.get('A')
     B = request.json.get('B')
