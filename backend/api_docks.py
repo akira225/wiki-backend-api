@@ -1,3 +1,55 @@
+registration_swag = {
+    'summary': "Register a new user",
+    'description': "Register a new user by username and password",
+    'consumes': "application/json",
+    'produces': "application/json",
+    'parameters': [
+        {
+            'name': "username",
+            'in': "body",
+            'required': True,
+            'schema': {
+                'type': 'string'
+            }
+        },
+        {
+            'name': "password",
+            'in': "body",
+            'required': True,
+            'schema': {
+                'type': 'string'
+            }
+        }
+    ],
+    'responses': {
+        "201": {
+            'description': "User has been created successfully",
+            'schema': {
+                "type": "object",
+                'properties': {
+                    'username': {
+                        "type": 'string'
+                    },
+                    'token': {
+                        "type": 'string'
+                    }
+                }
+            }
+        },
+        '400': {
+            'description': "Error message",
+            'schema': {
+                "type": "object",
+                'properties': {
+                    'msg': {
+                        "type": 'string'
+                    }
+                }
+            }
+        }
+    }
+}
+
 ban_swag = {
     'summary': "Exclude article from possible pathing",
     'description': "Exclude article from possible pathing",
@@ -49,22 +101,33 @@ ban_swag = {
     }
 }
 
-registration_swag = {
-    'summary': "Register a new user",
-    'description': "Register a new user by username and password",
+path_swag = {
+    'summary': "Find path",
+    'description': "Find path between 2 wiki articles",
     'consumes': "application/json",
     'produces': "application/json",
     'parameters': [
         {
-            'name': "username",
+            'name': "Authorization",
+            'description': 'JWT token',
+            'in': "header",
+            'required': True,
+            'schema': {
+                'type': 'string'
+            }
+        },
+        {
+            'name': "A",
+            'description': 'Start article',
             'in': "body",
             'required': True,
             'schema': {
                 'type': 'string'
             }
         },
-{
-            'name': "password",
+        {
+            'name': "B",
+            'description': 'End article',
             'in': "body",
             'required': True,
             'schema': {
@@ -73,21 +136,18 @@ registration_swag = {
         }
     ],
     'responses': {
-        "201": {
-            'description': "User has been created successfully",
+        "200": {
+            'description': "Path",
             'schema': {
                 "type": "object",
                 'properties': {
-                    'username': {
-                        "type": 'string'
-                    },
-                    'token': {
+                    'msg': {
                         "type": 'string'
                     }
                 }
             }
         },
-        '400': {
+        "400": {
             'description': "Error message",
             'schema': {
                 "type": "object",
@@ -115,7 +175,7 @@ login_swag = {
                 'type': 'string'
             }
         },
-{
+        {
             'name': "password",
             'in': "body",
             'required': True,
@@ -178,12 +238,12 @@ history_swag = {
                     'history': {
                         'schema': {
                             "type": "array"
-                            }
                         }
                     }
                 }
             }
         }
+    }
 }
 
 subscribe_swag = {
